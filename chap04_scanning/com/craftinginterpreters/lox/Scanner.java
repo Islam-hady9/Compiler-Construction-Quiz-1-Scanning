@@ -121,26 +121,34 @@ class Scanner {
     if (type == null) type = IDENTIFIER;
     addToken(type);
   }
+  //This function processes numbers, '.', 'e' and '_'
   private void number() {
-    while (isDigit(peek())) advance();
+	  String num = "";
+    while (isDigit(peek()) || peek() == '_') advance();
 
     // Look for a fractional part.
     if (peek() == '.' && isDigit(peekNext())) {
       // Consume the "."
       advance();
 
-      while (isDigit(peek())) advance();
+      while (isDigit(peek()) || peek() == '_') advance();
     }
     
     if (peek() == 'e' && (peekNext() == '+' || peekNext() == '-')) {
         // Consume the "e"
         advance();
         advance();
-        while (isDigit(peek())) advance();
+        while (isDigit(peek()) || peek() == '_') advance();
       }
 
+     for(int i = start; i < current; i++){
+    	 if(source.charAt(i) != '_') {
+             num += source.charAt(i);
+        }
+      }
+    //source.substring(start, current)
     addToken(NUMBER,
-        Double.parseDouble(source.substring(start, current)));
+        Double.parseDouble(num));
   }
   
   
