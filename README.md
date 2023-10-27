@@ -4,3 +4,4 @@
 - Add multiline comment using `/*lines of comments*/`
 - Use single quotation for string `'string'`
 - Add Scientific Notation `e` to numbers
+- Add `_` to numbers
